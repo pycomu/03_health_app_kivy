@@ -1,84 +1,64 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
+# https://www.techwithtim.net/tutorials/kivy-tutorial/multiple-screens/
+# https://www.youtube.com/watch?v=xaYn4XdieCs
 
-kv = """
-Screen:
-    BoxLayout:
-        orientation: 'vertical'
-        MDToolbar:
-            title: "MDToolbar"
-            left_action_items: [["menu", lambda x: nav_draw.set_state()]]
-        Widget:
-    NavigationLayout:    
-        ScreenManager:
-            id: screen_manager
-            Screen:
-                name: "scr1"
-                MDLabel:
-                    text: "Screen 1"
-                    halign: "center"
-        
-            Screen:
-                name: "scr2"
-                MDLabel:
-                    text: "Screen 2"
-                    halign: "center"
-                        
-        MDNavigationDrawer:
-            id: nav_draw
-            orientation: "vertical"
-            padding: "8dp"
-            spacing: "8dp"
-            
-            AnchorLayout:
-                anchor_x: "left"
-                size_hint_y: None
-                height: avatar.height
-    
-                Image:
-                    id: avatar
-                    size_hint: None, None
-                    size: "56dp", "56dp"
-                    source: "data/logo/kivy-icon-256.png"
-    
-            MDLabel:
-                text: "Kaustubh Gupta"
-                font_style: "Button"
-                size_hint_y: None
-                height: self.texture_size[1]
-        
-            MDLabel:
-                text: "youreamil@gmail.com"
-                font_style: "Caption"
-                size_hint_y: None
-                height: self.texture_size[1]
-            
-            ScrollView:
-                MDList:
-                    OneLineAvatarListItem:
-                        on_press:
-                            nav_draw.set_state("close")
-                            screen_manager.current = "scr1"
-    
-                        text: "Home"
-                        IconLeftWidget:
-                            icon: "home"
-    
-                    OneLineAvatarListItem:
-                        on_press:
-                            nav_draw.set_state("close")
-                            screen_manager.current = "scr2"
-                        text: "About"
-                        IconLeftWidget:
-                            icon: 'information'
-                                
-            Widget:
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+page = """
+WindowManager:   # definition of screenmanager
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    name: "main"
+
+    GridLayout:
+        cols:1
+
+        GridLayout:
+            cols: 2
+
+            Label:
+                text: "Password: (type 123)"
+
+            TextInput:
+                id: passw
+                multiline: False
+
+        Button:
+            text: "Submit"
+            on_release:
+                app.root.current = "second" if passw.text == "123" else "main"
+                root.manager.transition.direction = "left"
+
+
+<SecondWindow>:
+    name: "second"
+
+    Button:
+        text: "Go Back"
+        on_release:
+            app.root.current = "main"
+            root.manager.transition.direction = "right"
 """
 
-class Main(MDApp):
+class MainWindow(Screen):
+    pass
 
+
+class SecondWindow(Screen):
+    pass
+
+
+class WindowManager(ScreenManager): # class of screenmanager defined here, no ".add_widget"
+    pass
+
+
+class MyMainApp(App):
     def build(self):
-        return Builder.load_string(kv)
+        return Builder.load_string(page)
 
 
-Main().run()
+if __name__ == "__main__":
+    MyMainApp().run()

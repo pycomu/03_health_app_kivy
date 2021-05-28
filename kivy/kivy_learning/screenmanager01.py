@@ -1,51 +1,72 @@
+# https://github.com/attreyabhatt/KivyMD-Basics/blob/master/13%20-%20Switching%20Screens/main.py
+# https://www.youtube.com/watch?v=u3Ue6IlzbOE
+
 from kivymd.app import MDApp
-from kivy.lang import Builder # required to have screen definition inside py file
+from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.core.window import Window
-Window.size = (375, 750)
 
-# screen definition
-page = '''
-ScreenManager:
-    window_1:
-    window_2:
-        
-<window_1>:
-    id: "win1"
+page = """
+ScreenManager:   # definition of screenmanager
+    MenuScreen:
+    ProfileScreen:
+    UploadScreen:
+<MenuScreen>:
+    name: 'menu'
+    MDRectangleFlatButton:
+        text: 'Profile'
+        pos_hint: {'center_x':0.5,'center_y':0.6}
+        on_press: root.manager.current = 'profile'
+    MDRectangleFlatButton:
+        text: 'Upload'
+        pos_hint: {'center_x':0.5,'center_y':0.5}
+        on_press: root.manager.current = 'upload'
     
-    MDButton:
+<ProfileScreen>:
+    name: 'profile'
+    MDLabel:
+        text: 'Profile'
+        halign: 'center'
+    MDRectangleFlatButton:
+        text: 'Back'
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        on_press: root.manager.current = 'menu'
         
-        text:"Window 1"
-        font_size: 30
-        on_release: 
-            root.manager.current = "win2"
-             
-<window_2>:
-    id: "win2"
-    MDButton:
-        text: "Window 2"
-        font_size: 30
-        on_release:
-            root.manager.current = "win1"
-            
-'''        
+<UploadScreen>:
+    name: 'upload'
+    MDLabel:
+        text: 'Upload'
+        halign: 'center'
+    MDRectangleFlatButton:
+        text: 'Back'
+        pos_hint: {'center_x':0.5,'center_y':0.1}
+        on_press: root.manager.current = 'menu'
+        
+"""
 
-class window_1(Screen):
+
+class MenuScreen(Screen):
     pass
 
-class window_2(Screen):
+
+class ProfileScreen(Screen):
     pass
 
-ms = ScreenManager()
-ms.add_widget(window_1(name='win1'))
-ms.add_widget(window_2(name='win2'))
 
-class screenmanager1App(MDApp): # main class to build the Screen
+class UploadScreen(Screen):
+    pass
+
+
+# Create the class screen manager in python part with 3 screens
+sm = ScreenManager()
+sm.add_widget(MenuScreen(name='menu'))
+sm.add_widget(ProfileScreen(name='profile'))
+sm.add_widget(UploadScreen(name='upload'))
+
+
+class DemoApp(MDApp):
 
     def build(self):
-        self.scrmanager = Builder.load_string(page) # read in screen definition above
-        return self.scrmanager
+        return Builder.load_string(page)
 
 
-if __name__ == '__main__':
-    screenmanager1App().run()
+DemoApp().run()

@@ -1,13 +1,19 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen
 
+from home4screen import Home4Screen # import the functions used in this screen 
+
 from kivy.core.window import Window
 Window.size = (400, 750)
 
+class Home4Screen(Screen):
+    pass
+
+class Home3Screen(Screen):
+    pass
 
 class Home2Screen(Screen):
     pass
-
 
 class HomeScreen(Screen):
     pass

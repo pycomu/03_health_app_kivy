@@ -1,15 +1,31 @@
 #:import button kivymd.uix.button
 #:import label kivymd.uix.label
+#:import boxlayout kivymd.uix.boxlayout
 
 <HomeScreen>:
-    #Screen:
     BoxLayout:
-        orientation: 'vertical'  
-        MDLabel:
-            text: "Home Screen"
-            halign: "center"
-    
-    
-                    
-                    
+        orientation: 'vertical'
+        
+        MDTextField:
+            id: login 
+            hint_text: "Enter text here"
+            helper_text: "Input of home Screen"
+            helper_text_mode: "on_focus"
+            pos_hint:{'center_x': 0.5, 'center_y': 0.5}
+            size_hint_x:None
+            width:200
+            
+        MDFloatLayout:
+            canvas:
+                Color: 
+                    rgba: app.theme_cls.primary_light
+                    #rgba: app.theme_cls.primary_dark
+                    #rgba: 1,.6,0,1
+                
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 50, 50, 0, 0
+                        
+                        
 

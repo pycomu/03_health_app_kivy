@@ -1,47 +1,77 @@
 #:import utils kivy.utils
-#:include homescreen.kv
+#:include homescreen.kv         
 #:include home2screen.kv
+#:include home3screen.kv
+#:include home4screen.kv
 
 Screen:
-    MDToolbar :
-        id: titlename
-        title : 'Child Health App'        
-        md_bg_color: app.theme_cls.primary_color
-        left_action_items : [["menu", lambda x : nav_drawer.toggle_nav_drawer()]]
-        right_action_items: [["dots-vertical", lambda x: app.callback(x)]]
-        elevation : 10
-        pos_hint: {"top": 1, "left": 1}
-        size_hint: 1, .1
-
-    NavigationLayout :
-        ScreenManager :
-            id: screen_manager
-            size_hint: 1, 1
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar :
+            id: titlename
+            title : 'Child Health App - Home'        
+            md_bg_color: app.theme_cls.primary_color
+            left_action_items : [["menu", lambda x : nav_drawer.toggle_nav_drawer()]]
+            right_action_items: [["dots-vertical", lambda x: app.callback(x)]]
+            elevation : 10
             pos_hint: {"top": 1, "left": 1}
-            HomeScreen:
-                name: "home_screen"
-                id: home_screen
-            Home2Screen:
-                name: "home2_screen"
-                id: home2_screen
-        MDNavigationDrawer:
-            id : nav_drawer
-            BoxLayout :
-                orientation : 'vertical'
-                ScrollView :
-                    MDList :
-                        OneLineIconListItem :
-                            text : 'Home'
-                            on_release: 
-                                nav_drawer.set_state("close")
-                                screen_manager.current = "home_screen"
-                            IconLeftWidget:
-                                icon: 'pencil'
-                        OneLineIconListItem :
-                            text : 'Home 2'
-                            on_release: 
-                                nav_drawer.set_state("close")
-                                screen_manager.current = "home2_screen"
-                            IconLeftWidget:
-                                icon: 'pencil'
+            size_hint: 1, .1
+
+
+        NavigationLayout :              # Navigationlayout always due to navigation drawer
+            ScreenManager :             # Here definition of the pages for screen manager
+                id: screen_manager
+                size_hint: 1, 1
+                pos_hint: {"top": 1, "left": 1}
+                HomeScreen:
+                    name: "home_screen"
+                    id: home_screen
+                Home2Screen:
+                    name: "home2_screen"
+                    id: home2_screen
+                Home3Screen:
+                    name: "home3_screen"
+                    id: home3_screen
+                Home4Screen:
+                    name: "home4_screen"
+                    id: home4_screen
+            
+            MDNavigationDrawer:            # definition of navigation drawer
+                id : nav_drawer
+                BoxLayout :
+                    orientation : 'vertical'
+                    ScrollView :
+                        MDList :
+                            OneLineIconListItem :
+                                text : 'Home'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home_screen"
+                                    root.ids.titlename.title = "Child Health App - Home"
+                                IconLeftWidget:
+                                    icon: 'home'
+                            OneLineIconListItem :
+                                text : 'Home 2'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home2_screen"
+                                    root.ids.titlename.title = "Child Health App - Home 2"
+                                IconLeftWidget:
+                                    icon: 'star'
+                            OneLineIconListItem :
+                                text : 'Home 3'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home3_screen"
+                                    root.ids.titlename.title = "Child Health App - Home 3"
+                                IconLeftWidget:
+                                    icon: 'star'
+                            OneLineIconListItem :
+                                text : 'Home 4'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home4_screen"
+                                    root.ids.titlename.title = "Child Health App - Wikipedia"
+                                IconLeftWidget:
+                                    icon: 'star'
         

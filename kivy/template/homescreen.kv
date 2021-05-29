@@ -26,6 +26,35 @@
                     size: self.size
                     pos: self.pos
                     radius: 50, 50, 0, 0
+
+        StackLayout: 
+            orientation: "lr-bt"
+            padding: 20
+            spacing: 20
+
+
+
+            MDIconButton:
+                icon: "account"
+                text: "push"
+                canvas.before:
+                    Color:
+                        rgb: app.theme_cls.primary_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+            MDIconButton:
+                icon: "account"
+                text: "push"
+            MDIconButton:
+                icon: "account"
+                text: "push"
+                canvas.before:
+                    Color:
+                        rgb: app.theme_cls.primary_color
+                    Ellipse:
+                        size: 50, 50
+                        pos: self.pos
                         
                         
 

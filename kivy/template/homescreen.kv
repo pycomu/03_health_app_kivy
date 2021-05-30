@@ -5,27 +5,16 @@
 <HomeScreen>:
     BoxLayout:
         orientation: 'vertical'
+        MDIconButton:
+            icon: "home"
+            pos_hint: {"center_x": .5}
+            user_font_size: "80sp"
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_light
+        MDLabel:
+            text: "HOME Screen for Start "
+            halign: "center"            
         
-        MDTextField:
-            id: login 
-            hint_text: "Enter text here"
-            helper_text: "Input of home Screen"
-            helper_text_mode: "on_focus"
-            pos_hint:{'center_x': 0.5, 'center_y': 0.5}
-            size_hint_x:None
-            width:200
-            
-        MDFloatLayout:
-            canvas:
-                Color: 
-                    rgba: app.theme_cls.primary_light
-                    #rgba: app.theme_cls.primary_dark
-                    #rgba: 1,.6,0,1
-                
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
-                    radius: 50, 50, 0, 0
 
         StackLayout: 
             orientation: "lr-bt"

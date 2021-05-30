@@ -1,15 +1,32 @@
 from kivymd.app import MDApp
 from kivymd.uix.floatlayout import MDFloatLayout
+from kivy.properties import ObjectProperty
 
 from kivy.core.window import Window
 Window.size = (400, 750)
 
-from kivy.network.urlrequest import UrlRequest
-import certifi
+import database # import all the database function from database.py as class
+connection = database.connect()
+# c = connection.cursor()
 
 class TestPage(MDFloatLayout): # Screen "TestPage"
-    pass
+    pin_input = ObjectProperty() # variable for text input inside class
     
+    def check_pin(self): # check the entered pin vs database for login and go to home screen
+        print("PIN wie eingegebn: ", self.pin_input.text)
+        pin = str(self.pin_input.text[:4])
+        print("PIN auf 4 Stellen gekürzt: ",pin)
+
+        self.pin_input.text = "" # reset input field
+
+        pin_db = database.read_pin_account(connection)
+        # print(pin_db)
+        # print(type(pin_db))
+        if str(pin) == str(pin_db[0]):
+            print("now go to home screen ",pin_db[0])
+        else:
+            print("PIN is not correct",pin_db[0])
+
     
 class testtemplateApp(MDApp): # design in testtemplate.kv the screen
 
@@ -20,30 +37,7 @@ class testtemplateApp(MDApp): # design in testtemplate.kv the screen
         self.theme_cls.primary_hue = "500"
         self.theme_cls.theme_style = "Light"
     
-    def wiki_search_button(self):
-        query = self.root.ids["search_wiki"].text
-        if self.root.ids.search_wiki.text != "":
-            self.get_data(title=query)
-
-    def get_data(self, *args, title=None):
-        if title == None:
-            response = args[1]
-            random_article = response["query"]["random"][0]
-            title = random_article["title"]
-        endpoint = f"https://en.wikipedia.org/w/api.php?prop=extracts&explaintext&exintro&format=json&action=query&titles={title.replace(' ', '%100')}"
-        self.data_request = UrlRequest(endpoint,
-                                       on_success=self.set_textarea,
-                                       ca_file=certifi.where())
-
-    def set_textarea(self, request, response):
-        page_info = response["query"]["pages"]
-        page_id = next(iter(page_info))
-        page_title = page_info[page_id]["title"]
-        try:
-            content = page_info[page_id]["extract"]
-        except KeyError:
-            content = f"Sorry, but your search '{page_title}' got no results!\n\nPlease try again! "
-        self.root.ids["search_result"].text = f"{page_title}\n\n{content}"
+    
         
 
     def build(self):

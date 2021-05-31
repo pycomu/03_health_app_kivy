@@ -56,17 +56,16 @@ MDScreen:
             helper_text_mode: "on_focus"
             pos_hint:{'center_x': 0.5, 'center_y': 0.4}
             size_hint_x:None
-            width:200
+            width:200         
+        MDRaisedButton:
+            text: "Open Date picker"
+            pos_hint: {'center_x': 0.7, 'center_y': 0.4}
+            on_release: app.show_date_picker()
         MDRaisedButton:
             text: "Submit"
             pos_hint:{'center_x': 0.5, 'center_y': 0.1}
             size_hint_x: .5
             md_bg_color: 0,.4,.8,1
-            
-        MDRaisedButton:
-            text: "Open Date picker"
-            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
-            on_release: app.show_date_picker()
         
 """
 

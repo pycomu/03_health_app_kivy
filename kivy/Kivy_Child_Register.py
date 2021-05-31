@@ -3,6 +3,8 @@ from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.core.window import Window
 
+from kivymd.uix.picker import MDDatePicker
+
 Window.size = (304, 480)
 
 KV = """
@@ -27,6 +29,10 @@ MDScreen:
             user_font_size: "60sp"
             theme_text_color: "Custom"
             text_color: 0,.4,.8,1
+        MDToolbar:
+            title: "Register Child"
+            pos_hint: {"top": 1}
+            elevation: 10
         MDTextField:
             id: Firstname 
             hint_text: "First Name"
@@ -53,9 +59,14 @@ MDScreen:
             width:200
         MDRaisedButton:
             text: "Submit"
-            pos_hint:{'center_x': 0.5, 'center_y': 0.25}
+            pos_hint:{'center_x': 0.5, 'center_y': 0.1}
             size_hint_x: .5
             md_bg_color: 0,.4,.8,1
+            
+        MDRaisedButton:
+            text: "Open Date picker"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_release: app.show_date_picker()
         
 """
 
@@ -71,8 +82,35 @@ class ChildRegisterApp(MDApp):
         screen_manager.add_widget(Builder.load_string(KV))
         
         return screen_manager
+  
+    
+    def on_save(self, instance, value, date_range):
+        '''
+        Events called when the "OK" dialog box button is clicked.
 
-       
+        :type instance: <kivymd.uix.picker.MDDatePicker object>;
+
+        :param value: selected date;
+        :type value: <class 'datetime.date'>;
+
+        :param date_range: list of 'datetime.date' objects in the selected range;
+        :type date_range: <class 'list'>;
+        '''
+
+        print(instance, value, date_range)
+
+    def on_cancel(self, instance, value):
+        '''Events called when the "CANCEL" dialog box button is clicked.'''
+    """
+    def show_date_picker(self):
+        date_dialog = MDDatePicker()
+        date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
+        date_dialog.open()
+    """
+    def show_date_picker(self):
+        date_dialog = MDDatePicker(min_year=1990, max_year=2032)
+        date_dialog.open()
+
 
 if __name__ == '__main__':
     app = ChildRegisterApp()

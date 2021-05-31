@@ -39,10 +39,14 @@ class Dateentry(MDApp):
 
     def on_cancel(self, instance, value):
         '''Events called when the "CANCEL" dialog box button is clicked.'''
-
+    """
     def show_date_picker(self):
         date_dialog = MDDatePicker()
         date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
+        date_dialog.open()
+    """
+    def show_date_picker(self):
+        date_dialog = MDDatePicker(min_year=1990, max_year=2032)
         date_dialog.open()
 
 

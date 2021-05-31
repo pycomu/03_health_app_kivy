@@ -7,7 +7,7 @@ Window.size = (304, 480)
 
 KV = """
 MDScreen:
-    name: "LoginPage"
+    name: "ChildRegisterPage"
     MDFloatLayout:
         MDFloatLayout:
             id: back
@@ -59,10 +59,10 @@ MDScreen:
         
 """
 
-class LoginApp(MDApp):
+class ChildRegisterApp(MDApp):
 
     def change_screen(self, name):
-        screen_manager.current = LoginPage
+        screen_manager.current = ChildRegisterPage
     
     
     def build(self):
@@ -75,5 +75,5 @@ class LoginApp(MDApp):
        
 
 if __name__ == '__main__':
-    app = LoginApp()
+    app = ChildRegisterApp()
     app.run()

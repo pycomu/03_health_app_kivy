@@ -12,7 +12,7 @@ MDFloatLayout:
         elevation: 10
 
     MDRaisedButton:
-        text: "Open time picker"
+        text: "Open Date picker"
         pos_hint: {'center_x': .5, 'center_y': .5}
         on_release: app.show_date_picker()
 '''

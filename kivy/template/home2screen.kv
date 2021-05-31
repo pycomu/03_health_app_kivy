@@ -1,6 +1,7 @@
 #: import color kivy.graphics
 
 <Home2Screen>:
+    pin_input: pin_input # variable for pin input
     MDFloatLayout:
         canvas:
             Color:
@@ -28,11 +29,11 @@
                     halign: "center"
                     pos_hint:{'center_x': 0.5, 'center_y': 0.7}
                 MDTextField:
-                    id: login 
+                    id: pin_input # name of pin input widget 
                     hint_text: "Enter PIN here"
                     max_text_length: 4
                     multiline: False
-                    helper_text: "Your account PIN"
+                    helper_text: "Only 4 digits are taken"
                     helper_text_mode: "on_focus"
                     pos_hint:{'center_x': 0.5, 'center_y': 0.5}
                     size_hint_x:None
@@ -46,8 +47,6 @@
                     size_hint_x: 0.8
                     size_hint_y: 0.1
                     pos_hint:{'center_x': 0.5, 'center_y': 0.2}
-    
-    
-                    
-                    
+                    on_release:
+                        root.check_pin() # callback function to check PIN
 

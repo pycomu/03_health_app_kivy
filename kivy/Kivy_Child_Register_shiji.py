@@ -8,6 +8,11 @@ from kivymd.uix.picker import MDDatePicker
 Window.size = (304, 480)
 
 KV = """
+<Check@MDCheckbox>:
+    group: 'group'
+    size_hint: None, None
+    size: dp(48), dp(48)
+
 MDScreen:
     name: "ChildRegisterPage"
     MDFloatLayout:
@@ -54,18 +59,34 @@ MDScreen:
             hint_text: "Date of Birth"
             helper_text: "Please Enter Child's Date of Birth"
             helper_text_mode: "on_focus"
-            pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
             size_hint_x:None
             width:200         
         MDRaisedButton:
             text: "Open Date picker"
-            pos_hint: {'center_x': 0.7, 'center_y': 0.4}
+            pos_hint: {'center_x': 0.8, 'center_y': 0.4}
             on_release: app.show_date_picker()
         MDRaisedButton:
             text: "Submit"
             pos_hint:{'center_x': 0.5, 'center_y': 0.1}
             size_hint_x: .5
             md_bg_color: 0,.4,.8,1
+        MDLabel:
+            halign:"center"
+            text:"Male"
+            pos_hint: {'center_x': .2, 'center_y': 0.2}
+        Check:
+            active: True
+            pos_hint: {'center_x': .4, 'center_y': 0.2}
+
+        MDLabel:
+            halign:"center"
+            text:"Female"
+            pos_hint: {'center_x': .6, 'center_y': 0.2}
+            
+        Check:
+            active: True
+            pos_hint: {'center_x': .8, 'center_y': .2}
         
 """
 
@@ -109,6 +130,7 @@ class ChildRegisterApp(MDApp):
     def show_date_picker(self):
         date_dialog = MDDatePicker(min_year=1990, max_year=2032)
         date_dialog.open()
+
 
 
 if __name__ == '__main__':

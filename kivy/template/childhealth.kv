@@ -4,25 +4,94 @@
 #:include home3screen.kv
 #:include home4screen.kv
 
+<ContentNavigationDrawer>:      # layout definition of content page of naviagtion drawer (bar at left side)
+    orientation: "vertical"
+    padding: "8dp"
+    spacing: "8dp"
+
+    AnchorLayout:
+        anchor_x: "left"
+        size_hint_y: None
+        height: avatar.height
+
+        Image:
+            id: avatar
+            size_hint: None, None
+            size: "56dp", "56dp"
+            source: "data/logo/kivy-icon-256.png"
+
+    MDLabel:
+        text: "Child Health App"
+        font_style: "Button"
+        size_hint_y: None
+        height: self.texture_size[1]
+
+    ScrollView:
+        MDList:
+            OneLineIconListItem:
+                text: "Home"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    # root.ids.toolbar_title.title = "Child Health App - Home"
+                    root.screen_manager.current = "home_screen"
+                IconLeftWidget:
+                    icon: 'home'
+            OneLineIconListItem:
+                text: "Home 2"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    # root.ids.titlename.title = "Child Health App - Home2"
+                    root.screen_manager.current = "home2_screen"
+                IconLeftWidget:
+                    icon: 'account'
+            OneLineIconListItem:
+                text: "Home 3"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    # root.ids.titlename.title = "Child Health App - Home3"
+                    root.screen_manager.current = "home3_screen"
+                IconLeftWidget:
+                    icon: 'account'
+            OneLineIconListItem:
+                text: "Home 4"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    # root.ids.titlename.title = "Child Health App - Home4"
+                    root.screen_manager.current = "home4_screen"
+                IconLeftWidget:
+                    icon: 'account'
+            OneLineIconListItem:
+                text: "Theme"
+                on_press:
+                    #root.nav_drawer.set_state("close")
+                    # root.ids.titlename.title = "Child Health App - Home"
+                    root.show_theme_picker()
+                IconLeftWidget:
+                    icon: 'theme-light-dark'
+
+
+
+
 Screen:
-    BoxLayout:
+    BoxLayout: # splits the screen first in 2 boxes, box 1 for toolbar -> take away for "Signal" layout
         orientation: 'vertical'
         MDToolbar :
-            id: titlename
+            id: toolbar_title
             title : 'Child Health App - Home'        
             md_bg_color: app.theme_cls.primary_color
-            left_action_items : [["menu", lambda x : nav_drawer.toggle_nav_drawer()]]
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
             right_action_items: [["dots-vertical", lambda x: app.callback(x)]]
             elevation : 10
             pos_hint: {"top": 1, "left": 1}
             size_hint: 1, .1
 
-
-        NavigationLayout :              # Navigationlayout always due to navigation drawer
-            ScreenManager :             # Here definition of the pages for screen manager
+        MDNavigationLayout:
+            
+            ScreenManager:          # load the screenamanger with a list of different pages, imported at start of kv-file
                 id: screen_manager
                 size_hint: 1, 1
                 pos_hint: {"top": 1, "left": 1}
+
                 HomeScreen:
                     name: "home_screen"
                     id: home_screen
@@ -35,43 +104,13 @@ Screen:
                 Home4Screen:
                     name: "home4_screen"
                     id: home4_screen
-            
-            MDNavigationDrawer:            # definition of navigation drawer
-                id : nav_drawer
-                BoxLayout :
-                    orientation : 'vertical'
-                    ScrollView :
-                        MDList :
-                            OneLineIconListItem :
-                                text : 'Home'
-                                on_release: 
-                                    nav_drawer.set_state("close")
-                                    screen_manager.current = "home_screen"
-                                    root.ids.titlename.title = "Child Health App - Home"
-                                IconLeftWidget:
-                                    icon: 'home'
-                            OneLineIconListItem :
-                                text : 'Home 2'
-                                on_release: 
-                                    nav_drawer.set_state("close")
-                                    screen_manager.current = "home2_screen"
-                                    root.ids.titlename.title = "Child Health App - Home 2"
-                                IconLeftWidget:
-                                    icon: 'star'
-                            OneLineIconListItem :
-                                text : 'Home 3'
-                                on_release: 
-                                    nav_drawer.set_state("close")
-                                    screen_manager.current = "home3_screen"
-                                    root.ids.titlename.title = "Child Health App - Home 3"
-                                IconLeftWidget:
-                                    icon: 'star'
-                            OneLineIconListItem :
-                                text : 'Home 4'
-                                on_release: 
-                                    nav_drawer.set_state("close")
-                                    screen_manager.current = "home4_screen"
-                                    root.ids.titlename.title = "Child Health App - Wikipedia"
-                                IconLeftWidget:
-                                    icon: 'star'
-        
+                
+
+
+
+            MDNavigationDrawer:     # drawing of naviagtion drawer (bar at left side)
+                id: nav_drawer
+
+                ContentNavigationDrawer: # root of content of navigation drawer, class in py-file
+                    screen_manager: screen_manager
+                    nav_drawer: nav_drawer

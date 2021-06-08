@@ -67,8 +67,12 @@ class TestPage(ScreenManager): # Screen "TestPage"
             toast("PIN re-entered is not matching !")
             self.ids.pin_input.text = ""
             self.ids.re_pin_input.text = ""
-               
-        # store_account(connection, account_input, pin_input, email_input)
+        
+        account_input = self.ids.account_input.text
+        pin_input = self.ids.pin_input.text
+        email_input = self.ids.email_input.text
+
+        database.store_account(connection, account_input, pin_input, email_input)
         print("account created")
     
 

@@ -11,17 +11,20 @@
         
 
         MDFloatLayout:
-            canvas:
-                Color:
-                    rgba: app.theme_cls.primary_dark
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
-                    radius: 0, 0, 0, 0
+            # canvas:
+            #     Color:
+            #         rgba: app.theme_cls.primary_dark
+            #     RoundedRectangle:
+            #         size: self.size
+            #         pos: self.pos
+            #         radius: 0, 0, 0, 0
             MDCard:
+                elevation : 10
                 size_hint: .85, .85
                 pos_hint: {"center_x": .5, "center_y": .5}
-
+                radius: 20
+                
+                
                 MDFloatLayout:
                     orientation: "vertical"
                     MDLabel:
@@ -86,7 +89,7 @@
                         pos_hint:{'center_x': 0.5, 'center_y': 0.1}
                         on_release:
                             root.create_account() # callback function
-                            #root.current = "child"
+                            
 
  
                             

@@ -25,13 +25,20 @@ class TestPage(ScreenManager): # Screen "TestPage"
         print("PIN wie eingegebn: ", self.ids.pin_input.text)
         print("email wie eingegebn: ", self.ids.email_input.text)
         
-        if self.ids.pin_input.text != self.ids.re_pin_input.text:
+        if self.ids.pin_input.text == self.ids.re_pin_input.text:
+            if self.ids.pin_input.text == "":
+                toast("PIN not entered, field is empty!")
+            else:
+                account_input = self.ids.account_input.text
+                pin_input = self.ids.pin_input.text
+                email_input = self.ids.email_input.text
+                database.store_account(connection, account_input, pin_input, email_input)
+                print("account created")
+
+        else:
             toast("PIN re-entered is not matching !")
             self.ids.pin_input.text = ""
-            self.ids.re_pin_input.text = ""
-               
-        store_account(connection, account_input, pin_input, email_input)
-        print("account created")
+            self.ids.re_pin_input.text = ""       
     
 
 class testtemplate_dbApp(MDApp): # design in testtemplate.kv the screen

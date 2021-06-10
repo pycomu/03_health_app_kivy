@@ -3,6 +3,7 @@
 #:include home2screen.kv
 #:include home3screen.kv
 #:include home4screen.kv
+#:include homeBMITracker.kv
 
 <ContentNavigationDrawer>:      # layout definition of content page of naviagtion drawer (bar at left side)
     orientation: "vertical"
@@ -104,13 +105,54 @@ Screen:
                 Home4Screen:
                     name: "home4_screen"
                     id: home4_screen
-                
-
-
-
-            MDNavigationDrawer:     # drawing of naviagtion drawer (bar at left side)
-                id: nav_drawer
-
-                ContentNavigationDrawer: # root of content of navigation drawer, class in py-file
-                    screen_manager: screen_manager
-                    nav_drawer: nav_drawer
+                HomeBMITracker:
+                    name: "homeBMITracker_screen"
+                    id: BMI_screen
+            
+            MDNavigationDrawer:            # definition of navigation drawer
+                id : nav_drawer
+                BoxLayout :
+                    orientation : 'vertical'
+                    ScrollView :
+                        MDList :
+                            OneLineIconListItem :
+                                text : 'Home'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home_screen"
+                                    root.ids.titlename.title = "Child Health App - Home"
+                                IconLeftWidget:
+                                    icon: 'home'
+                            OneLineIconListItem :
+                                text : 'Home 2'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home2_screen"
+                                    root.ids.titlename.title = "Child Health App - Home 2"
+                                IconLeftWidget:
+                                    icon: 'star'
+                            OneLineIconListItem :
+                                text : 'Home 3'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home3_screen"
+                                    root.ids.titlename.title = "Child Health App - Home 3"
+                                IconLeftWidget:
+                                    icon: 'star'
+                            OneLineIconListItem :
+                                text : 'Home 4'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "home4_screen"
+                                    root.ids.titlename.title = "Child Health App - Wikipedia"
+                                IconLeftWidget:
+                                    icon: 'star'
+                            OneLineIconListItem :
+                                text : 'BMI Tracker'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "homeBMITracker_screen"
+                                    root.ids.titlename.title = "Child Health App - BMI Tracker"
+                                IconLeftWidget:
+                                    icon: 'star'
+        

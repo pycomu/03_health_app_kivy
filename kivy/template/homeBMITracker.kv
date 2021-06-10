@@ -1,0 +1,50 @@
+#:import button kivymd.uix.button
+#:import label kivymd.uix.label
+
+
+<HomeBMITracker>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDIconButton:
+            id: icon
+            icon: "account-circle"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            user_font_size: "80sp"
+            theme_text_color: "Custom"
+            text_color: app.theme_cls.primary_light
+        MDLabel:
+            text: "Please enter PIN for account User."
+            halign: "center"
+        MDFloatLayout:
+            canvas:
+                Color: 
+                    rgba: app.theme_cls.primary_light
+                    #rgba: app.theme_cls.primary_dark
+                    #rgba: 1,.6,0,1
+                
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 50, 50, 0, 0
+            
+            
+            MDTextField:
+                id: login 
+                hint_text: "Enter PIN here"
+                max_text_length: 4
+                multiline: False
+                helper_text: "Your account PIN"
+                helper_text_mode: "on_focus"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.5}
+                size_hint_x:None
+                width:200
+                password: True
+                required : True
+                icon_right: 'login'
+
+            MDFillRoundFlatButton:
+                text: "Login"
+                text_color: 1,1,1,1
+                size_hint_x: 0.8
+                size_hint_y: 0.1
+                pos_hint:{'center_x': 0.5, 'center_y': 0.2}

@@ -8,6 +8,7 @@ from kivy.properties import ObjectProperty
 
 from home4screen import Home4Screen # import the functions used in this screen 
 from home2screen import Home2Screen
+from homeBMITracker import HomeBMITracker
 
 from kivy.core.window import Window
 Window.size = (400, 750)
@@ -24,6 +25,9 @@ class Home2Screen(Screen):
     pass
 
 class HomeScreen(Screen):
+    pass
+
+class HomeBMITracker(Screen):
     pass
 
  

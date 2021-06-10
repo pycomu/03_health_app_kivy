@@ -3,6 +3,7 @@ from kivy.uix.screenmanager import Screen
 
 from home4screen import Home4Screen # import the functions used in this screen 
 from home2screen import Home2Screen
+from homeBMITracker import HomeBMITracker
 
 from kivy.core.window import Window
 Window.size = (400, 750)

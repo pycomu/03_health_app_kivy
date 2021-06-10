@@ -1,11 +1,11 @@
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
-from kivy.core.window import Window
+#from kivy.core.window import Window
 
 from kivymd.uix.picker import MDDatePicker
 
-Window.size = (304, 480)
+#Window.size = (304, 480)
 
 KV = """
 <Check@MDCheckbox>:

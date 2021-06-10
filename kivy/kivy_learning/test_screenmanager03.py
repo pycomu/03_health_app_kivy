@@ -9,7 +9,7 @@ Screen:
             title: "MDToolbar"
             left_action_items: [["menu", lambda x: nav_draw.set_state()]]
         Widget:
-    NavigationLayout:    # see at https://kivymd.readthedocs.io/en/0.104.0/components/navigation-drawer/index.html
+    MDNavigationLayout:    # see at https://kivymd.readthedocs.io/en/0.104.0/components/navigation-drawer/index.html
         ScreenManager:
             id: screen_manager
             Screen:

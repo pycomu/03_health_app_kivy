@@ -1,10 +1,11 @@
 #: import color kivy.graphics
 
+
 <TestPage>:
     MDScreen:
         name: "terms"
         terms_text : terms_text
-
+        
         MDFloatLayout:
             canvas:
                 Color:
@@ -13,43 +14,46 @@
                     size: self.size
                     pos: self.pos
                     radius: 0, 0, 0, 0
-
+            
+                
             MDCard:
+                id : card
                 size_hint: .85, .85
                 pos_hint: {"center_x": .5, "center_y": .5}
                 orientation: "vertical"
+                height : self.minimum_height
                 padding: 15 
-                radius: 28
+                radius: 20
                 
-                MDLabel:
-                    text: "Terms & Conditions"
-                    halign: "center"
+                # MDLabel:
+                #     text: "Terms & Conditions"
+                #     halign: "center"
                 
                 BoxLayout:
+                    orientation: "horizontal"
                     size_hint_y : None
                     height : self.minimum_height
                     spacing : "5dp"    
                 
                     MDCheckbox:
+                        id: check_box
                         size_hint: None, None
                         size: dp(48), dp(48)
-                        active: False
-                        pos_hint: {'center_x': .1, 'center_y': .9}
+                        active: False       
+                        halign: "center"             
                 
                     MDLabel:
                         text: "Please agree to \n the terms & conditions"
                         halign: "center"
-                        #pos_hint:{'center_x': 0.5, 'center_y': 0.9}
+                        
                    
                 MDFillRoundFlatButton:
                     text: "Continue"
                     text_color: 1,1,1,1
                     size_hint_x: 0.8
-                    size_hint_y: 0.1
-                    #pos_hint:{'center_x': 0.5, 'center_y': 0.1}
+                    pos_hint:{'center_x': 0.5} #, 'center_y': 0.1}
                     on_release:
-                        root.set_text() # callback function
-                        root.current = "account"    
+                        root.check_terms(check_box.active) # checkbox set ? then continue and remember current date
                     
                 BoxLayout:
                     orientation: "vertical"    
@@ -58,15 +62,14 @@
                         
                         MDLabel:
                             id: terms_text
-                            text: """x"""
+                            text: root.terms_text
+                            halign : "left"
                             size_hint_y: None
                             height: self.texture_size[1]
                             text_size: self.width, None
-                            line_height: 1.15
-                    
-                
-                        
-                    
+                            line_height: 1.2
+                            
+         
 
     MDScreen:
         name: "account"
@@ -87,7 +90,7 @@
             MDCard:
                 size_hint: .85, .85
                 pos_hint: {"center_x": .5, "center_y": .5}
-                radius: 28
+                radius: 20
 
                 MDFloatLayout:
                     orientation: "vertical"
@@ -152,8 +155,8 @@
                         size_hint_y: 0.1
                         pos_hint:{'center_x': 0.5, 'center_y': 0.1}
                         on_release:
-                            root.create_account() # callback function
-                            root.current = "child"
+                            root.create_account() # checking function, store in db and switch to next screen
+        
 
     MDScreen:
         name: "child"
@@ -173,7 +176,7 @@
             MDCard:
                 size_hint: .85, .85
                 pos_hint: {"center_x": .5, "center_y": .5}
-                radius: 28
+                radius: 20
 
                 MDFloatLayout:
                     orientation: "vertical"
@@ -182,7 +185,7 @@
                         halign: "center"
                         pos_hint:{'center_x': 0.5, 'center_y': 0.9}
                     MDTextField:
-                        id: child_name_input # name of pin input widget 
+                        id: child_name_input # name of first name input widget 
                         hint_text: "Enter child first name"
                         max_text_length: 15
                         multiline: False
@@ -194,7 +197,7 @@
                         required : True
                         icon_right: 'account-child'
                     MDTextField:
-                        id: child_last_input # name of pin input widget 
+                        id: child_last_input # name of last name input widget 
                         hint_text: "Enter child last name"
                         max_text_length: 15
                         multiline: False
@@ -206,7 +209,7 @@
                         required : True
                         icon_right: 'account-child'
                     MDTextField:
-                        id: child_age_input # name of pin input widget 
+                        id: child_age_input # name of b'ay input widget 
                         hint_text: "Enter child's birthday"
                         multiline: False
                         helper_text: "Push calendar icon"
@@ -222,11 +225,11 @@
                         on_press:
                             root.show_date_picker()
                     MDTextField:
-                        id: child_gender_input # name of pin input widget 
+                        id: child_gender_input # name of gender input widget 
                         hint_text: "Enter child gender"
-                        max_text_length: 4
+                        max_text_length: 6
                         multiline: False
-                        helper_text: "Repeat PIN"
+                        helper_text: "male or female"
                         helper_text_mode: "on_focus"
                         pos_hint:{'center_x': 0.5, 'center_y': 0.4}
                         size_hint_x:None
@@ -241,6 +244,5 @@
                         size_hint_y: 0.1
                         pos_hint:{'center_x': 0.5, 'center_y': 0.1}
                         on_release:
-                            # store all in database
-                            #root.current = "account"
+                            root.create_child() # store child info in database
                             

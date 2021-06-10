@@ -33,7 +33,7 @@ Screen:
         title: "MDNavigationDrawer"
         left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
 
-    NavigationLayout:
+    MDNavigationLayout:
         x: toolbar.height
 
         ScreenManager:

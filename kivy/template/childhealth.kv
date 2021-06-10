@@ -3,6 +3,7 @@
 #:include home2screen.kv
 #:include home3screen.kv
 #:include home4screen.kv
+#:include homeBMITracker.kv
 
 Screen:
     BoxLayout:
@@ -35,6 +36,9 @@ Screen:
                 Home4Screen:
                     name: "home4_screen"
                     id: home4_screen
+                HomeBMITracker:
+                    name: "homeBMITracker_screen"
+                    id: BMI_screen
             
             MDNavigationDrawer:            # definition of navigation drawer
                 id : nav_drawer
@@ -72,6 +76,14 @@ Screen:
                                     nav_drawer.set_state("close")
                                     screen_manager.current = "home4_screen"
                                     root.ids.titlename.title = "Child Health App - Wikipedia"
+                                IconLeftWidget:
+                                    icon: 'star'
+                            OneLineIconListItem :
+                                text : 'BMI Tracker'
+                                on_release: 
+                                    nav_drawer.set_state("close")
+                                    screen_manager.current = "homeBMITracker_screen"
+                                    root.ids.titlename.title = "Child Health App - BMI Tracker"
                                 IconLeftWidget:
                                     icon: 'star'
         

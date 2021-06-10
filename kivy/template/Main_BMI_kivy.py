@@ -19,6 +19,9 @@ class Home2Screen(Screen):
 class HomeScreen(Screen):
     pass
 
+class HomeBMITracker(Screen):
+    pass
+
 
 class ChildHealthApp(MDApp):
 

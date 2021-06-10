@@ -2,7 +2,7 @@ import sqlite3
 
 
 def connect():
-    return sqlite3.connect("./template/health_app.db") # take care of working directory !
+    return sqlite3.connect("./health_app.db") # take care of working directory !
 
 
 def read_pin_account(connection):

@@ -1,0 +1,58 @@
+# navigation drawer definition in separate kv file.
+#:include contentnavigationdrawer.kv
+
+<Def_Screen>: # returned by build function
+
+    MDNavigationLayout:
+
+        ScreenManager:
+            id: screen_manager
+
+            Screen:
+                name: "Screen1"
+                id: screen1
+                
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    # try to put as template ond day ?
+                    MDToolbar: 
+                        title: "Toolbar of Screen 1"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+                    BoxLayout: # Boxlayout for all other widgets on screen 1
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: "Screen 1 with toolbar"
+                            halign: "center" 
+                        MDRaisedButton:
+                            text: "back to Screen 2 without toolbar"
+                            pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                            on_release:
+                                screen_manager.current = "Screen2"
+            Screen:
+                name: "Screen2"
+                id: screen2
+                
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    BoxLayout: # Boxlayout for all other widgets on screen 1
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: "Screen 2 without toolbar"
+                            halign: "center"
+                        MDRaisedButton:
+                            text: "back to Screen 1 with toolbar"
+                            pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                            on_release:
+                                screen_manager.current = "Screen1"
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer

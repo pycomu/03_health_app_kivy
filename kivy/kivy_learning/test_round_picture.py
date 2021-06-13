@@ -24,8 +24,8 @@ Screen:
                     Color:
                         rgb: 1, 1, 1
                     Ellipse:
-                        pos: 100, 200
-                        size: 200 , 200 
+                        pos: 100, 50
+                        size: 150 , 150 
                         source: "img/ai_portraet.jpg"
                         angle_start: 0
                         angle_end: 360
@@ -34,9 +34,29 @@ Screen:
                     Color:
                         rgb: 1, 1, 1
                     Ellipse:
-                        pos: 100, 400
-                        size: 200 , 200 
+                        pos: 100, 250
+                        size: 150 , 150  
                         source: "img/happy_monster.jpeg"
+                        angle_start: 0
+                        angle_end: 360
+            FloatLayout:    
+                canvas:
+                    Color:
+                        rgb: 1, 1, 1
+                    Ellipse:
+                        pos: 100, 450
+                        size: 150 , 150  
+                        source: "img/pycomu.png"
+                        angle_start: 0
+                        angle_end: 360
+            FloatLayout:    
+                canvas:
+                    Color:
+                        rgb: 1, 1, 1
+                    Ellipse:
+                        pos: 100, 650
+                        size: 150 , 150  
+                        source: "img/robot.png"
                         angle_start: 0
                         angle_end: 360
         

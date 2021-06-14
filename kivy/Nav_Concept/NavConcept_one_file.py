@@ -62,6 +62,12 @@ KV = '''
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "Screen3"
 
+            OneLineListItem:
+                text: "Screen 4"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Screen4"
+
             OneLineIconListItem:
                 text: "Theme"
                 on_press:
@@ -70,7 +76,6 @@ KV = '''
                     icon: 'theme-light-dark'
 
 Screen:
-
     MDNavigationLayout:
 
         ScreenManager:
@@ -99,6 +104,7 @@ Screen:
                             pos_hint:{'center_x': 0.5, 'center_y': 0.4}
                             on_release:
                                 screen_manager.current = "Screen2"
+                                root.btn_clicked()
             Screen:
                 name: "Screen2"
                 id: screen2
@@ -139,6 +145,25 @@ Screen:
                             pos_hint:{'center_x': 0.5, 'center_y': 0.4}
                             on_release:
                                 screen_manager.current = "Screen2"
+            Screen:
+                name: "Screen4"
+                id: screen4
+
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    BoxLayout: 
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: "Screen 4 without toolbar, but with a function"
+                            halign: "center"
+                        MDRaisedButton:
+                            text: "back to Screen 1 with toolbar"
+                            pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                            on_release:
+                                root.btn_clicked()
+                                screen_manager.current = "Screen1"
+                                
 
         MDNavigationDrawer:
             id: nav_drawer
@@ -151,19 +176,22 @@ Screen:
 '''
 
 class ContentNavigationDrawer(BoxLayout):
-    pass
+    # pass
     # screen_manager = ObjectProperty() # later when in a seperate kv file
     # nav_drawer = ObjectProperty()
+    #btn_clicked = ObjectProperty()
     
     def show_theme_picker(self):
         theme_dialog = MDThemePicker()
         theme_dialog.open()
 
-
+    def btn_clicked(self):
+        print("You clicked the button on Screen 4")
 
 class NavConcept_one_file(MDApp):
     def build(self):
         return Builder.load_string(KV)
+
 
 if __name__ == '__main__':
     app = NavConcept_one_file()

@@ -2,6 +2,7 @@
 #:include contentnavigationdrawer.kv
 
 #:include screen3.kv
+#:include screen4.kv
 
 <Def_Screen>: # returned by build function
 
@@ -51,10 +52,16 @@
                             on_release:
                                 screen_manager.current = "Screen1"
 
-            Screen3:
+            Screen3: # imported on top
                 name: "Screen3"
                 id: screen3
                 screen_manager: screen_manager # required as screen3 is in seperate kv file and imported
+                nav_drawer: nav_drawer
+
+            Screen4: # imported on top
+                name: "Screen4"
+                id: screen3
+                screen_manager: screen_manager # required as screen4 is in seperate kv file and imported
                 nav_drawer: nav_drawer
             
 

@@ -20,6 +20,13 @@ class ContentNavigationDrawer(BoxLayout):
         theme_dialog = MDThemePicker()
         theme_dialog.open()
 
+class Screen4(Screen):
+    screen_manager = ObjectProperty() # because in seperate kv file
+    nav_drawer = ObjectProperty()
+    
+    def btn_clicked(self):
+        print("You clicked the button on Screen 4")
+
 class Screen3(Screen):
     screen_manager = ObjectProperty() # because in seperate kv file
     nav_drawer = ObjectProperty()

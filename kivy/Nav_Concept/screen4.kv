@@ -1,0 +1,22 @@
+
+<Screen4>:
+    
+    BoxLayout:
+        orientation: 'vertical'
+
+        BoxLayout: # Boxlayout for all other widgets on screen 4
+            orientation: 'vertical'
+            MDLabel:
+                text: "(imported) Screen 4 without toolbar, but a print function"
+                halign: "center" 
+            MDRaisedButton:
+                text: "press here to test the print call"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                on_release:
+                    root.btn_clicked()
+            
+            MDRaisedButton:
+                text: "print something and back to Screen 1"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                on_release:
+                    root.screen_manager.current = "Screen1" # need to add root as in seperate kv file

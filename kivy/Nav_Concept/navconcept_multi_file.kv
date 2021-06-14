@@ -1,6 +1,8 @@
 # navigation drawer definition in separate kv file.
 #:include contentnavigationdrawer.kv
 
+#:include screen3.kv
+
 <Def_Screen>: # returned by build function
 
     MDNavigationLayout:
@@ -49,6 +51,12 @@
                             on_release:
                                 screen_manager.current = "Screen1"
 
+            Screen3:
+                name: "Screen3"
+                id: screen3
+                screen_manager: screen_manager # required as screen3 is in seperate kv file and imported
+                nav_drawer: nav_drawer
+            
 
         MDNavigationDrawer:
             id: nav_drawer

@@ -1,0 +1,21 @@
+
+<Screen3>:
+    
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar: 
+            title: "Toolbar of Screen 3"
+            elevation: 10
+            left_action_items: [['menu', lambda x: root.nav_drawer.set_state("open")]] # need to add root as in seperate kv file
+
+        BoxLayout: # Boxlayout for all other widgets on screen 3
+            orientation: 'vertical'
+            MDLabel:
+                text: "Screen 3 with toolbar"
+                halign: "center" 
+            MDRaisedButton:
+                text: "back to Screen 2 without toolbar"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                on_release:
+                    root.screen_manager.current = "Screen2" # need to add root as in seperate kv file

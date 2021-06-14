@@ -55,6 +55,12 @@ KV = '''
                 on_press:
                     root.nav_drawer.set_state("close")
                     root.screen_manager.current = "Screen2"
+            
+            OneLineListItem:
+                text: "Screen 3"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "Screen3"
 
             OneLineIconListItem:
                 text: "Theme"
@@ -111,6 +117,28 @@ Screen:
                             on_release:
                                 screen_manager.current = "Screen1"
 
+            Screen:
+                name: "Screen3"
+                id: screen3
+                
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    MDToolbar: 
+                        title: "Toolbar of Screen 3"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+
+                    BoxLayout: # Boxlayout for all other widgets on screen 3
+                        orientation: 'vertical'
+                        MDLabel:
+                            text: "Screen 3 with toolbar"
+                            halign: "center" 
+                        MDRaisedButton:
+                            text: "back to Screen 2 without toolbar"
+                            pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                            on_release:
+                                screen_manager.current = "Screen2"
 
         MDNavigationDrawer:
             id: nav_drawer
@@ -124,7 +152,7 @@ Screen:
 
 class ContentNavigationDrawer(BoxLayout):
     pass
-    # screen_manager = ObjectProperty() # because in seperate kv file
+    # screen_manager = ObjectProperty() # later when in a seperate kv file
     # nav_drawer = ObjectProperty()
     
     def show_theme_picker(self):
@@ -137,5 +165,6 @@ class NavConcept_one_file(MDApp):
     def build(self):
         return Builder.load_string(KV)
 
-
-NavConcept_one_file().run()
+if __name__ == '__main__':
+    app = NavConcept_one_file()
+    app.run()

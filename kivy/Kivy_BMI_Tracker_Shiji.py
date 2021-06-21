@@ -61,6 +61,11 @@ MDScreen:
             pos_hint:{'center_x': 0.5, 'center_y': 0.5}
             size_hint_x:None
             width:200
+        MDSlider:
+            min: 20
+            max: 150
+            value: 20
+            pos_hint:{'center_x': 0.5, 'center_y': 0.45}
         MDIconButton:
             id: icon
             icon: "human-male-height"

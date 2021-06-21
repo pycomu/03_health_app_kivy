@@ -62,9 +62,11 @@ MDScreen:
             size_hint_x:None
             width:200
         MDSlider:
+            id: slider_id
             min: 20
             max: 150
             value: 20
+            step: 1
             pos_hint:{'center_x': 0.5, 'center_y': 0.45}
         MDIconButton:
             id: icon

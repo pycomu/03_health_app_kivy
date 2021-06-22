@@ -1,21 +1,63 @@
 #: import get_color_from_hex kivy.utils.get_color_from_hex
 
+
 <MainPage>:
+# +++++++++++++++++++++++++++ Register ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    MDScreen:
+        name: "Register"
+        MDFloatLayout:
+            orientation: "vertical"
+            MDLabel:
+                text : "Register Screen"
+                halign : "center"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.9}
+            MDFillRoundFlatButton:
+                text: "nach Login"
+                md_bg_color: app.theme_cls.primary_light
+                theme_text_color: "Custom"
+                
+                text_color: app.theme_cls.primary_dark
+                
+                size_hint_x: 0.8
+                size_hint_y: 0.1
+                pos_hint:{'center_x': 0.5, 'center_y': 0.2}
+                on_release:
+                    root.goto_login() # next page via py file
+                    
+
+# +++++++++++++++++++++++++++ Login ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    MDScreen:
+        name: "Login"
+        
+        MDFloatLayout:
+            orientation: "vertical"
+            MDLabel:
+                text : "Login Screen"
+                halign : "center"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.9}
+            MDFillRoundFlatButton:
+                text: "Blutdruck messen"
+                md_bg_color: app.theme_cls.primary_light
+                theme_text_color: "Custom"
+                
+                text_color: app.theme_cls.primary_dark
+                
+                size_hint_x: 0.8
+                size_hint_y: 0.1
+                pos_hint:{'center_x': 0.5, 'center_y': 0.2}
+                on_release:
+                    root.current = "Messen"
     
 # +++++++++++++++++++++++++++ MESSEN ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     MDScreen:
         name: "Messen"
-        # date : date # later with date picker
-        # time : time # later with time picker
+        
         sys : sys
         dia : dia
         pulse : pulse
         weight : weight
         sugar : sugar
-        # date_time : date_time
-
-        # radius: [0, 0, 0, 0]
-        # md_bg_color: app.theme_cls.primary_color
+        
 
         BoxLayout:
             orientation: 'vertical'
@@ -45,6 +87,7 @@
                     width:200
                     required : True
                     icon_right: 'heart-plus'
+                                    
                 MDTextField:
                     id: dia # name of pin input widget 
                     hint_text: "Dia in mm Hg"
@@ -107,7 +150,6 @@
                     on_release:
                         root.check_input()
         
-            
 
 # ----------------------- NAVIGATION BAR -------------------------
         MDBoxLayout:
@@ -150,11 +192,27 @@
     MDScreen:
         name: "Diagramm"
         radius: [0, 0, 0, 0]
-        md_bg_color: app.theme_cls.primary_color
-       
-        MDLabel:
-            text: "Blutdruck Diagramm und exportieren"
-            halign: "center"
+        md_bg_color: app.theme_cls.primary_dark
+        MDFloatLayout:
+            orientation: "vertical"
+            MDLabel:
+                text : "Blutdruck Diagramm und exportieren"
+                halign : "center"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.9}
+
+            MDFillRoundFlatButton:
+                text: "Export csv-file"
+                md_bg_color: app.theme_cls.primary_light
+                theme_text_color: "Custom"
+                
+                text_color: app.theme_cls.primary_dark
+                
+                size_hint_x: 0.8
+                size_hint_y: 0.1
+                pos_hint:{'center_x': 0.5, 'center_y': 0.2}
+                on_release:
+                    root.export_csv()
+            
             
 
 # ----------------------- NAVIGATION BAR -------------------------

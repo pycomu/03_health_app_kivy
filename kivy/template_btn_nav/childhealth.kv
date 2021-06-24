@@ -1,0 +1,67 @@
+
+<MainPage>:
+    MDScreen:
+        name: "Login"
+        pin_input: pin_input # variable for pin input
+        MDFloatLayout:
+            canvas:
+                Color:
+                    rgba: app.theme_cls.primary_light
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 0, 0, 0, 0
+
+            MDCard:
+                size_hint: .85, .85
+                pos_hint: {"center_x": .5, "center_y": .5}
+
+                MDFloatLayout:
+                    orientation: "vertical"
+                    MDIconButton:
+                        id: icon
+                        icon: "account-circle"
+                        pos_hint: {"center_x": .5, "center_y": .9}
+                        user_font_size: "80sp"
+                        theme_text_color: "Custom"
+                        text_color: app.theme_cls.primary_light
+                    MDLabel:
+                        text: "Please enter PIN for account User."
+                        halign: "center"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.7}
+                    MDTextField:
+                        id: pin_input # name of pin input widget 
+                        hint_text: "Enter PIN here"
+                        max_text_length: 4
+                        multiline: False
+                        helper_text: "Only 4 digits are taken"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.5}
+                        size_hint_x:None
+                        width:200
+                        password: True
+                        required : True
+                        icon_right: 'login'
+                    MDFillRoundFlatButton:
+                        text: "Login"
+                        text_color: 1,1,1,1
+                        size_hint_x: 0.8
+                        size_hint_y: 0.1
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.3}
+                        on_release:
+                            root.check_pin() # callback function to check PIN
+                    MDLabel:
+                        text: " New user ? Create an [color=#0000ff][u]Account[/u][/color] "
+                        text_size: self.width, None
+                        size_hint_y: None
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.1}
+                        halign: "center"
+                        markup: True
+                        on_ref_press:
+                            root.current = "Account"
+
+    MDScreen:
+        name: "Account"
+
+
+    MDScreen:

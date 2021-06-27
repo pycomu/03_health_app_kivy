@@ -1,4 +1,5 @@
 import datetime
+from logging import root
 from kivymd.app import MDApp
 from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -17,6 +18,7 @@ import database # import all the database function from database.py as class
 connection = database.connect()
 
 
+
 class MainPage(ScreenManager): 
     date = StringProperty()
     time = StringProperty()
@@ -27,11 +29,10 @@ class MainPage(ScreenManager):
     sugar = NumericProperty()
 
     now = datetime.datetime.now()
-    now = now.strftime("Heute %d.%m.%Y - jetzt %H:%M Uhr")
+    now = now.strftime("Today %d.%m.%Y - now %H:%M")
     date_time = StringProperty(now)
     
-    def goto_login(self):
-        self.current = "Login"
+
 
     def show_theme_picker(self):
         theme_dialog = MDThemePicker()
@@ -55,13 +56,13 @@ class MainPage(ScreenManager):
             database.store_data(connection,date_in, time_in, sys_input, dia_input,
              pulse_input, weight_input,sugar_input) # call database function from imported class
             
-            toast("Eingabe wurde gespeichert !")
+            toast("Data entries stored !")
             self.ids.sys.text = ""
             self.ids.dia.text = ""
             self.ids.pulse.text = ""
             self.ids.sugar.text = ""
         else:
-            toast("Eingabe bitte korrigieren !")
+            toast("Please correct input values !")
 
     def export_csv(self):
         database.db_export_csv() # call database function from imported class
@@ -69,7 +70,7 @@ class MainPage(ScreenManager):
             
         
     
-class BlutdruckmessenApp(MDApp): 
+class BloodPressureApp(MDApp): 
     date_time = StringProperty
     start_page = StringProperty(None)
 
@@ -79,7 +80,9 @@ class BlutdruckmessenApp(MDApp):
         self.theme_cls.accent_palette = 'Blue'
         self.theme_cls.primary_hue = "500"
         self.theme_cls.theme_style = "Light"
-         
+
+        
+        
 
     def build(self):
         return MainPage() # read in the kv-file and build the screen
@@ -87,5 +90,5 @@ class BlutdruckmessenApp(MDApp):
     
 
 if __name__ == '__main__':
-    app = BlutdruckmessenApp()
+    app = BloodPressureApp()
     app.run()

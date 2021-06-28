@@ -2,7 +2,7 @@
 <MainPage>:
     MDScreen:
         name: "Login"
-        pin_input: pin_input # variable for pin input
+        login_input: login_input # variable for pin input
         MDFloatLayout:
             canvas:
                 Color:
@@ -30,7 +30,7 @@
                         halign: "center"
                         pos_hint:{'center_x': 0.5, 'center_y': 0.7}
                     MDTextField:
-                        id: pin_input # name of pin input widget 
+                        id: login_input # name of pin input widget 
                         hint_text: "Enter PIN here"
                         max_text_length: 4
                         multiline: False
@@ -49,19 +49,272 @@
                         size_hint_y: 0.1
                         pos_hint:{'center_x': 0.5, 'center_y': 0.3}
                         on_release:
-                            root.check_pin() # callback function to check PIN
+                            root.check_login() # callback function to check PIN
                     MDLabel:
-                        text: " New user ? Create an [color=#0000ff][u]Account[/u][/color] "
+                        text: " New user ? Create an [ref=][color=#0000ff][u]Account[/u][/color][/ref] "
                         text_size: self.width, None
                         size_hint_y: None
                         pos_hint:{'center_x': 0.5, 'center_y': 0.1}
                         halign: "center"
                         markup: True
                         on_ref_press:
-                            root.current = "Account"
+                            root.current = "Account_terms" # only if really no account is existing !!!
 
     MDScreen:
-        name: "Account"
+        name: "Account_terms"
+        terms_text : terms_text
+        
+        MDFloatLayout:
+            canvas:
+                Color:
+                    rgba: app.theme_cls.primary_light
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 0, 0, 0, 0
+
+            MDCard:
+                id : card
+                size_hint: .85, .85
+                pos_hint: {"center_x": .5, "center_y": .5}
+                orientation: "vertical"
+                height : self.minimum_height
+                padding: 15 
+                radius: 20
+                                
+                BoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y : None
+                    height : self.minimum_height
+                    spacing : "5dp"    
+                
+                    MDCheckbox:
+                        id: check_box
+                        size_hint: None, None
+                        size: dp(48), dp(48)
+                        active: False       
+                        halign: "center"             
+                
+                    MDLabel:
+                        text: "Please agree to \n the terms & conditions"
+                        halign: "center"
+                        
+                   
+                MDFillRoundFlatButton:
+                    text: "Continue"
+                    text_color: 1,1,1,1
+                    size_hint_x: 0.8
+                    pos_hint:{'center_x': 0.5} 
+                    on_release:
+                        root.check_terms(check_box.active) # checkbox set ? then continue and remember current date
+                    
+                BoxLayout:
+                    orientation: "vertical"    
+                    padding: 15
+                    ScrollView:
+                        
+                        MDLabel:
+                            id: terms_text
+                            text: root.terms_text
+                            halign : "left"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            text_size: self.width, None
+                            line_height: 1.2
+            
+
+    MDScreen:
+        name: "Account_adult"
+        account_input : account_input
+        pin_input : pin_input
+        re_pin_input : re_pin_input
+        email_input : email_input
+        
+
+        MDFloatLayout:
+            canvas:
+                Color:
+                    rgba: app.theme_cls.primary_dark
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 0, 0, 0, 0
+            MDCard:
+                size_hint: .85, .85
+                pos_hint: {"center_x": .5, "center_y": .5}
+                radius: 20
+
+                MDFloatLayout:
+                    orientation: "vertical"
+                    MDLabel:
+                        text: "Please create here your account"
+                        halign: "center"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.9}
+                    MDTextField:
+                        id: account_input # name of pin input widget 
+                        hint_text: "Enter account name"
+                        max_text_length: 15
+                        multiline: False
+                        helper_text: "Max. 15 letters"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.7}
+                        size_hint_x:None
+                        width:200
+                        required : True
+                        icon_right: 'account'
+                    MDTextField:
+                        id: email_input # name of pin input widget 
+                        hint_text: "Enter e-mail"
+                        max_text_length: 25
+                        multiline: False
+                        helper_text: "Max. 25 letters"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.6}
+                        size_hint_x:None
+                        width:200
+                        required : True
+                        icon_right: 'email'
+                    MDTextField:
+                        id: pin_input # name of pin input widget 
+                        hint_text: "Enter PIN here"
+                        max_text_length: 4
+                        multiline: False
+                        helper_text: "Only 4 digits are taken"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                        size_hint_x:None
+                        width:200
+                        password: True
+                        required : True
+                        icon_right: 'login'
+                    MDTextField:
+                        id: re_pin_input # name of pin input widget 
+                        hint_text: "Re-Enter PIN here"
+                        max_text_length: 4
+                        multiline: False
+                        helper_text: "Repeat PIN"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.3}
+                        size_hint_x:None
+                        width:200
+                        password: True
+                        required : True
+                        icon_right: 'repeat'
+                    MDFillRoundFlatButton:
+                        text: "Continue"
+                        text_color: 1,1,1,1
+                        size_hint_x: 0.8
+                        size_hint_y: 0.1
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.1}
+                        on_release:
+                            root.create_account() # checking function, store in db and switch to next screen
+        
+            
+
+    MDScreen:
+        name: "Account_child"
+        child_name_input : child_name_input
+        child_last_input : child_last_input
+        child_age_input : child_age_input
+        child_gender_input : child_gender_input
+
+        MDFloatLayout:
+            canvas:
+                Color:
+                    rgba: app.theme_cls.primary_light
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: 0, 0, 0, 0
+            MDCard:
+                size_hint: .85, .85
+                pos_hint: {"center_x": .5, "center_y": .5}
+                radius: 20
+
+                MDFloatLayout:
+                    orientation: "vertical"
+                    MDLabel:
+                        text: "Please enter here your child information"
+                        halign: "center"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.9}
+                    MDTextField:
+                        id: child_name_input # name of first name input widget 
+                        hint_text: "Enter child first name"
+                        max_text_length: 15
+                        multiline: False
+                        helper_text: "Max. 15 letters"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.7}
+                        size_hint_x:None
+                        width:200
+                        required : True
+                        icon_right: 'account-child'
+                    MDTextField:
+                        id: child_last_input # name of last name input widget 
+                        hint_text: "Enter child last name"
+                        max_text_length: 15
+                        multiline: False
+                        helper_text: "Max. 15 letters"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.6}
+                        size_hint_x:None
+                        width:200
+                        required : True
+                        icon_right: 'account-child'
+                    MDTextField:
+                        id: child_age_input # name of b'ay input widget 
+                        hint_text: "Enter child's birthday"
+                        multiline: False
+                        helper_text: "Push calendar icon"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.5}
+                        size_hint_x:None
+                        width:200
+                        readonly : True
+                        required : True
+                    MDIconButton:
+                        icon: 'calendar'
+                        pos_hint:{'center_x': 0.75, 'center_y': 0.5}
+                        on_press:
+                            root.show_date_picker()
+                    MDTextField:
+                        id: child_gender_input # name of gender input widget 
+                        hint_text: "Enter child gender"
+                        max_text_length: 6
+                        multiline: False
+                        helper_text: "male or female"
+                        helper_text_mode: "on_focus"
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                        size_hint_x:None
+                        width:200
+                        required : True
+                        icon_right: 'gender-male-female'
+                    MDFillRoundFlatButton:
+                        text: "Submit"
+                        text_color: 1,1,1,1
+                        size_hint_x: 0.8
+                        size_hint_y: 0.1
+                        pos_hint:{'center_x': 0.5, 'center_y': 0.1}
+                        on_release:
+                            root.create_child() # store child info in database
+        
 
 
     MDScreen:
+        name: "Home"
+        BoxLayout:
+            orientation: 'vertical'
+            MDToolbar:
+                title: "Home"
+                elevation: 10
+                right_action_items: [["dots-vertical", lambda x: root.show_theme_picker()]]
+            
+            MDFloatLayout:
+                orientation: "vertical"
+                MDIconButton:
+                    id: icon
+                    icon: "home"
+                    pos_hint: {"center_x": .5, "center_y": .9}
+                    user_font_size: "80sp"
+                    theme_text_color: "Custom"
+                    text_color: app.theme_cls.primary_light

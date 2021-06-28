@@ -25,7 +25,7 @@ class MainPage(ScreenManager):
         pin_db = database.read_pin_account(connection)
         print(pin_db)
         print(type(pin_db))
-        if pin_db == None:
+        if pin_db == None: # no value yet in table account in database ?
             self.ids.login_input.text = "" # reset input field
             toast("Account not existing, please register")
         else:

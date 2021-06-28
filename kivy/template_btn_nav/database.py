@@ -1,6 +1,6 @@
 import sqlite3
 
-dbfile_path_name = "./health_app.db" # take care of working directory !
+dbfile_path_name = "./template_btn_nav/health_app.db" # take care of working directory !
 
 def connect():
     try:

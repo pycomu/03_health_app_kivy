@@ -36,6 +36,13 @@ class MainPage(ScreenManager):
                 self.ids.login_input.text = "" # reset input field
                 toast("PIN incorrect, account existing?")
 
+    def account_exist(self):
+        pin_db = database.read_pin_account(connection)
+        if pin_db == None:
+            self.current = "Account_terms"
+        else:
+            toast("Account is existing, remember your PIN!")
+
 
 # functions for screen terms & condition +++++++++++++++++++ 
    

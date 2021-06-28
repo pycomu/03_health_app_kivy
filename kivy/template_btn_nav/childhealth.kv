@@ -58,7 +58,7 @@
                         halign: "center"
                         markup: True
                         on_ref_press:
-                            root.current = "Account_terms" # only if really no account is existing !!!
+                            root.account_exist() # go to register only if really no account is existing !!! 
 
     MDScreen:
         name: "Account_terms"

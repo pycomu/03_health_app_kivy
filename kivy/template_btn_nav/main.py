@@ -1,7 +1,7 @@
 from logging import root
 from kivymd.app import MDApp
 from kivy.uix.screenmanager import Screen, ScreenManager
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 from kivymd.toast import toast
 
 from kivymd.uix.picker import MDDatePicker
@@ -127,6 +127,21 @@ class MainPage(ScreenManager):
     def show_theme_picker(self):
         theme_dialog = MDThemePicker()
         theme_dialog.open()
+
+# functions for BMI Tracker screen  +++++++++++++++++++
+
+    child_first_bmi = StringProperty()
+    child_height_bmi = NumericProperty
+    child_weight_bmi = NumericProperty
+    child_age_bmi = NumericProperty
+    # child_bmi_calc = NumericProperty
+
+    def store_bmi(self):
+        pass
+
+        # database.store_bmi_data(connection,child_first_bmi, child_height_bmi, child_weight_bmi, child_age_bmi, child_bmi_calc, timestamp) 
+
+
 
 # App class to build screens +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++     
 class ChildHealthApp(MDApp): 

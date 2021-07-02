@@ -1,6 +1,6 @@
 import sqlite3
 
-dbfile_path_name = "./template_btn_nav/health_app.db" # take care of working directory !
+dbfile_path_name = "./health_app.db" # take care of working directory !
 
 def connect():
     try:
@@ -27,3 +27,6 @@ def store_child_info(connection, child_first_name, child_last_name, child_bday, 
      with connection:
         connection.execute("INSERT INTO child (child_first_name, child_last_name, child_bday, child_gender) VALUES (?, ?, ?, ?)", (child_first_name, child_last_name, child_bday, child_gender))       
 
+def store_bmi_data(connection, logfile_child_first, logfile_height, logfile_weight, logfile_age_act, logfile_bmi,logfile_timestamp):
+     with connection:
+        connection.execute("INSERT INTO logfile (logfile_child_first, logfile_height, logfile_weight, logfile_age_act, logfile_bmi,logfile_timestamp) VALUES (?, ?, ?, ?, ?, ?)", (logfile_child_first, logfile_height, logfile_weight, logfile_age_act, logfile_bmi,logfile_timestamp))       

@@ -1,5 +1,6 @@
 
 <MainPage>:
+# ++++++++++++++++++++++++++++++++ SCREEN LOGIN +++++++++++++++++++++++++++++++++++
     MDScreen:
         name: "Login"
         login_input: login_input # variable for pin input
@@ -59,7 +60,7 @@
                         markup: True
                         on_ref_press:
                             root.account_exist() # go to register only if really no account is existing !!! 
-
+# ++++++++++++++++++++++++++++++++ SCREEN ACCOUNT-TERMS +++++++++++++++++++++++++++++++++++
     MDScreen:
         name: "Account_terms"
         terms_text : terms_text
@@ -122,7 +123,7 @@
                             text_size: self.width, None
                             line_height: 1.2
             
-
+# ++++++++++++++++++++++++++++++++ SCREEN ACCOUNT-ADULT +++++++++++++++++++++++++++++++++++
     MDScreen:
         name: "Account_adult"
         account_input : account_input
@@ -209,7 +210,7 @@
                         on_release:
                             root.create_account() # checking function, store in db and switch to next screen
         
-            
+# ++++++++++++++++++++++++++++++++ SCREEN ACCOUNT-CHILD +++++++++++++++++++++++++++++++++++            
 
     MDScreen:
         name: "Account_child"
@@ -298,7 +299,7 @@
                         on_release:
                             root.create_child() # store child info in database
         
-
+# ++++++++++++++++++++++++++++++++ SCREEN HOME +++++++++++++++++++++++++++++++++++
 
     MDScreen:
         name: "Home"
@@ -318,3 +319,164 @@
                     user_font_size: "80sp"
                     theme_text_color: "Custom"
                     text_color: app.theme_cls.primary_light
+# ----------------------- NAVIGATION BAR -------------------------
+        MDBoxLayout:
+            size_hint_y:None
+            size_hint_x: 1
+            height: "65dp"
+            spacing: "10dp"
+            padding: "12dp", 0, "12dp", 0
+
+            canvas.before:
+                Color:
+                    rgb: app.theme_cls.primary_light  
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            FloatLayout:
+                pos_hint: {"center_x": .5}
+                MDIconButton:
+                    icon: "medical-bag"
+                    size_hint: None, None
+                    pos_hint: {"center_y": .5,"center_x": .2}
+                    on_release:
+                        root.current = "BMI-tracker"
+                
+                MDIconButton:
+                    icon: "chart-line"
+                    pos_hint: {"center_y": .5,"center_x": .5}
+                    on_release: 
+                        #root.current = "Diagramm"
+                
+                MDIconButton:
+                    icon: "information"
+                    pos_hint: {"center_y": .5,"center_x": .8}
+                    on_release: 
+                        #root.current = "Information"
+
+# ++++++++++++++++++++++++++++++++ SCREEN BMI-input +++++++++++++++++++++++++++++++++++
+    MDScreen:
+        name: "BMI-tracker"
+        child_first_bmi : child_first_bmi
+        child_height_bmi : child_height_bmi
+        child_weight_bmi : child_weight_bmi
+        child_age_bmi : child_age_bmi
+        # child_bmi_calc : child_bmi_calc
+        BoxLayout:
+            orientation: 'vertical'
+            MDToolbar:
+                title: "BMI Tracker"
+                elevation: 10
+                right_action_items: [["dots-vertical", lambda x: root.show_theme_picker()]]
+            
+            MDFloatLayout:
+                orientation: "vertical"
+                MDIconButton:
+                    id: icon
+                    icon: "medical-bag"
+                    pos_hint: {"center_x": .5, "center_y": .9}
+                    user_font_size: "80sp"
+                    theme_text_color: "Custom"
+                    text_color: app.theme_cls.primary_light
+                MDLabel:
+                    text: "Please enter here your child's measured data"
+                    halign: "center"
+                    pos_hint:{'center_x': 0.5, 'center_y': 0.8}
+                MDTextField:
+                    id: child_first_bmi # name of first name input widget 
+                    hint_text: "Enter child first name"
+                    max_text_length: 15
+                    multiline: False
+                    helper_text: "Max. 15 letters"
+                    helper_text_mode: "on_focus"
+                    pos_hint:{'center_x': 0.5, 'center_y': 0.7}
+                    size_hint_x:None
+                    width:200
+                    required : True
+                    icon_right: 'account-child'
+                MDTextField:
+                    id: child_height_bmi # name of height input widget 
+                    hint_text: "Enter child height in cm"
+                    max_text_length: 3
+                    multiline: False
+                    helper_text: "Max. 3 digits"
+                    helper_text_mode: "on_focus"
+                    pos_hint:{'center_x': 0.5, 'center_y': 0.6}
+                    size_hint_x:None
+                    width:200
+                    required : True
+                    icon_right: 'human-male-height'
+                MDTextField:
+                    id: child_weight_bmi # name of weight input widget 
+                    hint_text: "Enter child's weight in Kg"
+                    max_text_length: 3
+                    multiline: False
+                    helper_text: "Max. 3 digits"
+                    helper_text_mode: "on_focus"
+                    pos_hint:{'center_x': 0.5, 'center_y': 0.5}
+                    size_hint_x:None
+                    width:200
+                    required : True
+                    icon_right: 'weight-kilogram'
+                
+                MDTextField:
+                    id: child_age_bmi # name of age input widget 
+                    hint_text: "Enter child's age in years"
+                    max_text_length: 2
+                    multiline: False
+                    helper_text: "Max. 2 digits"
+                    helper_text_mode: "on_focus"
+                    pos_hint:{'center_x': 0.5, 'center_y': 0.4}
+                    size_hint_x:None
+                    width:200
+                    required : True
+                    # readonly : True
+                    icon_right: 'calendar'
+                MDLabel:
+                    text: "Here comes the calculated BMI"
+                    halign: "center"
+                    pos_hint:{'center_x': 0.5, 'center_y': 0.3}
+                MDFillRoundFlatButton:
+                    text: "Submit & Calculate"
+                    text_color: 1,1,1,1
+                    size_hint_x: 0.8
+                    size_hint_y: 0.1
+                    pos_hint:{'center_x': 0.5, 'center_y': 0.2}
+                    on_release:
+                        root.store_bmi() # store child's bmi info in database
+# ----------------------- NAVIGATION BAR -------------------------
+        MDBoxLayout:
+            size_hint_y:None
+            size_hint_x: 1
+            height: "65dp"
+            spacing: "10dp"
+            padding: "12dp", 0, "12dp", 0
+
+            canvas.before:
+                Color:
+                    rgb: app.theme_cls.primary_light  
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            FloatLayout:
+                pos_hint: {"center_x": .5}
+                MDIconButton:
+                    icon: "home"
+                    size_hint: None, None
+                    pos_hint: {"center_y": .5,"center_x": .2}
+                    on_release:
+                        root.current = "Home"
+                
+                MDIconButton:
+                    icon: "chart-line"
+                    pos_hint: {"center_y": .5,"center_x": .5}
+                    on_release: 
+                        #root.current = "Diagramm"
+                
+                MDIconButton:
+                    icon: "information"
+                    pos_hint: {"center_y": .5,"center_x": .8}
+                    on_release: 
+                        #root.current = "Information"

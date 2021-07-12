@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = Blood&Sugar-Log_1.0
+title = BloodSugarV1
 
 # (str) Package name
-package.name = Blood&Sugar-Log_1.0
+package.name = BloodSugarV1
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.pycomu
